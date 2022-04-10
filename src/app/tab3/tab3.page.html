@@ -1,17 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="info">
     <ion-title>
-      Tab 3
+     Ionic Date
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-segment [(ngModel)]="selectedMode" scrollable>
+      <ion-segment-button [value]="mode" *ngFor="let mode of modes">
+      <ion-label>{{mode}}</ion-label>
+      </ion-segment-button>
+      </ion-segment>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
+
+  <!--<ion-item (click)="showPicker = !showPicker"><ion-label>Date</ion-label>
+    <ion-text slot="end">
+      {{formattedString}}
+    </ion-text>
+    <ion-item>
+      <ion-datetime *ngIf="showPicker" #datetime [value]="dateValue" size="cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons="true" (ionCancel)="showPicker = false;">
+      </ion-datetime>
+    </ion-item>-->
+
+<ion-content>
+<ion-item id="open-modal" mode="md">
+  <ion-icon icon="calendar-outline" slot="start" color="primary">
+
+  </ion-icon><ion-label>Pick Date</ion-label>
+  <ion-text slot="end">  {{formattedString}}</ion-text>
+</ion-item>
+<ion-modal trigger="open-modal">
+<ng-template>
+<ion-content>
+  <ion-datetime  #datetime [value]="dateValue" size="cover" (ionChange)="dateChanged(datetime.value)" showDefaultButtons="true" (ionCancel)="showPicker = false;">
+  </ion-datetime>
 </ion-content>
+</ng-template>
+</ion-modal>
+</ion-content>
+<ion-tab-bar slot="bottom">
+</ion-tab-bar>
+
+
+
+
+
+
